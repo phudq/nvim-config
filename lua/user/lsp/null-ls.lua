@@ -1,5 +1,12 @@
 local null_ls_status_ok, null_ls = pcall(require, "null-ls")
 if not null_ls_status_ok then
+  print("null_ls_status_ok")
+	return
+end
+
+local mason_null_ls_status_ok, mason_null_ls = pcall(require, "null-ls")
+if not mason_null_ls_status_ok then
+  print("mason_null_ls_status_ok")
 	return
 end
 
@@ -8,25 +15,18 @@ local formatting = null_ls.builtins.formatting
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
 
-null_ls.setup({
-	debug = false,
-	sources = {
-		formatting.eslint_d,
-		formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-		-- formatting.prettierd.with({ extra_args = { "--single-quote" } }),
-		formatting.black.with({ extra_args = { "--fast" } }),
-		-- formatting.yapf,
-		formatting.stylua,
-		diagnostics.flake8,
-	},
-	on_attach = function(client)
-		if client.resolved_capabilities.document_formatting then
-			vim.cmd([[
-            augroup LspFormatting
-                autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 2000)
-            augroup END
-            ]])
-		end
-	end,
+null_ls.setup()
+
+mason_null_l.setup({
+    ensure_installed = {'stylua', 'jq'},
+    handlers = {
+        function() end, -- disables automatic setup of all null-ls sources
+        stylua = function(source_name, methods)
+          null_ls.register(null_ls.builtins.formatting.stylua)
+        end,
+        shfmt = function(source_name, methods)
+          -- custom logic
+          require('mason-null-ls').default_setup(source_name, methods) -- to maintain default behavior
+        end,
+    },
 })

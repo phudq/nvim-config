@@ -67,3 +67,11 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
+
+-- Copilot
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+keymap("i", "<C-H>", 'copilot#Previous()', { silent = true, expr = true })
+keymap("i", "<C-K>", 'copilot#Next()', { silent = true, expr = true })
+
