@@ -11,7 +11,22 @@ local opts = {
 
 local mappings = {
     ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-    ["c"] = { "<cmd>bdelete<CR>", "Close Buffer" }
+    ["c"] = { "<cmd>bdelete<CR>", "Close Buffer" },
+    g = {
+        d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
+        D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto Declaration" },
+        r = { "<cmd>lua vim.lsp.buf.references()<CR>", "Goto References" },
+        i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto Implementation" },
+        h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show Hover" },
+        s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Show Signature" },
+        a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
+        f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format" },
+        n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "Next Diagnostic" },
+        p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "Previous Diagnostic" },
+    },
+    l = {
+        r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
+    }
 }
 
 

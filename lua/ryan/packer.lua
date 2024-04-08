@@ -48,6 +48,7 @@ return require('packer').startup(function(use)
     use 'numToStr/Comment.nvim'
     use 'folke/which-key.nvim'
     use { 'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons' }
-    use 'github/copilot.vim'
+    use "lukas-reineke/indent-blankline.nvim"
 
+    use 'Exafunction/codeium.vim'
 end)
